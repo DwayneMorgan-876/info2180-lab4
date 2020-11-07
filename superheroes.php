@@ -1,5 +1,5 @@
 <?php
-
+header("Access-Control-Allow-Origin: *");
 $superheroes = [
   [
       "id" => 1,
@@ -64,9 +64,24 @@ $superheroes = [
 ];
 
 ?>
+<?php $newvar = filter_var($_GET['query'], FILTER_SANITIZE_STRING);?>
 
 <ul>
 <?php foreach ($superheroes as $superhero): ?>
   <li><?= $superhero['alias']; ?></li>
 <?php endforeach; ?>
 </ul>
+
+<?php foreach ($superheroes as $superhero): ?>
+<?php if($newvar == $superhero['name'] or $newvar == $superhero['alias'] ):?>
+  <h3><?= $superhero['alias']; ?></h3>
+  <h4><?= $superhero['name']; ?></h4>
+  <p><?= $superhero['biography']; ?></p>
+  <?php break?>
+  <?php endif;?>
+<?php endforeach; ?>
+
+
+<?php if($newvar != $superhero['name'] && $newvar != "" && $newvar != $superhero['alias']):?>
+  <h2 style="color:red">"Superhero not found"</h2>
+<?php endif;?>
