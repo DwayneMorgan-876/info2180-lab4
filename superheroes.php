@@ -62,26 +62,30 @@ $superheroes = [
       "biography" => "Notably powerful, Wanda Maximoff has fought both against and with the Avengers, attempting to hone her abilities and do what she believes is right to help the world.",
   ], 
 ];
-
 ?>
-<?php $newvar = filter_var($_GET['query'], FILTER_SANITIZE_STRING);?>
 
-<ul>
+
+<?php $heroname = filter_var($_GET['query'], FILTER_SANITIZE_STRING);?>
+
+
+  <ul>
+  <?php foreach ($superheroes as $superhero): ?>
+    <li><?= $superhero['alias']; ?></li>
+  <?php endforeach; ?>
+  </ul>
+
+
+
 <?php foreach ($superheroes as $superhero): ?>
-  <li><?= $superhero['alias']; ?></li>
-<?php endforeach; ?>
-</ul>
-
-<?php foreach ($superheroes as $superhero): ?>
-<?php if($newvar == $superhero['name'] or $newvar == $superhero['alias'] ):?>
-  <h3><?= $superhero['alias']; ?></h3>
-  <h4><?= $superhero['name']; ?></h4>
-  <p><?= $superhero['biography']; ?></p>
-  <?php break?>
-  <?php endif;?>
+<?php if($heroname == $superhero['name'] or $heroname == $superhero['alias'] or $superhero==""):?>
+        <h3><?= $superhero['alias']; ?></h3>
+        <h4><?= $superhero['name']; ?></h4>
+         <p><?= $superhero['biography']; ?></p>
+<?php break?>
+<?php endif;?>
 <?php endforeach; ?>
 
 
-<?php if($newvar != $superhero['name'] && $newvar != "" && $newvar != $superhero['alias']):?>
+<?php if($heroname != $superhero['name'] && $heroname != "" && $heroname != $superhero['alias']):?>
   <h2 style="color:red">"Superhero not found"</h2>
 <?php endif;?>
