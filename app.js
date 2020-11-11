@@ -20,7 +20,7 @@ window.onload=function superherosearch(){
    }
  }
 
-	xhrequest.open("GET", "http://localhost:8080/superheroes.php?query="+searchinput, true);
+	xhrequest.open("GET", "http://localhost:8080/superheroes.php?query="+searchinput);
 	xhrequest.send();
 })
 
